@@ -117,7 +117,7 @@ vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.smartindent = true -- make indenting smarter again
 vim.opt.autoindent = true -- make indenting smarter again
 vim.opt.swapfile = false -- creates a swapfile
-vim.opt.backup = true -- creates a backup file
+vim.opt.backup = false -- creates a backup file
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program) it is not allowed to be edited
 vim.opt.fileencoding = 'utf-8' -- the encoding written to a file
 
@@ -1053,6 +1053,13 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+  },
+
+  {
+    'ethanholz/nvim-lastplace',
+    config = function()
+      require('nvim-lastplace').setup()
     end,
   },
 
