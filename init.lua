@@ -179,6 +179,8 @@ vim.opt.sidescrolloff = 10
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>')
+vim.keymap.set('n', '<C-up>', '{')
+vim.keymap.set('n', '<C-down>', '}')
 
 local enabled = true
 function ToggleDiagnostics()
@@ -991,6 +993,8 @@ require('lazy').setup({
       -- { '<leader>bl', '<Cmd>BufferLineCloseLeft<CR>', desc = 'Delete Buffers to the Left' },
       { '<S-h>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
       { '<S-l>', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
+      { '<S-left>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
+      { '<S-right>', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
       -- { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev Buffer' },
       -- { ']b', '<cmd>BufferLineCycleNext<cr>', desc = 'Next Buffer' },
     },
