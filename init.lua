@@ -187,14 +187,16 @@ function ToggleDiagnostics()
   -- if this Neovim version supports checking if diagnostics are enabled
   -- then use that for the current state
   if vim.diagnostic.is_disabled then
-    enabled = not vim.diagnostic.is_disabled()
+    -- enabled = not vim.diagnostic.is_disabled()
+    enabled = vim.diagnostic.is_enabled()
   end
   enabled = not enabled
 
   if enabled then
     vim.diagnostic.enable()
   else
-    vim.diagnostic.disable()
+    -- vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
   end
 end
 
@@ -205,8 +207,14 @@ end)
 -- Diagnostic keymaps
 -- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 -- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float({scope="line"}), { desc = "Show diagnostic [E]rror messages" })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.diagnostic.config({
+  virtual_text = true,
+})
+
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.open_float({scope="line"}), { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -318,13 +326,17 @@ require('lazy').setup({
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').register {
+      require('which-key').add {
         -- ["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
         -- ["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle Diagnostics On/Off', _ = 'which_key_ignore' },
+        -- ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+        -- ['<leader>t'] = { name = '[T]oggle Diagnostics On/Off', _ = 'which_key_ignore' },
         -- ["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
         -- ["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+        { "<leader>r", group = "[R]ename" },
+        { "<leader>r_", hidden = true },
+        { "<leader>t", group = "[T]oggle Diagnostics On/Off" },
+        { "<leader>t_", hidden = true },
       }
     end,
   },
@@ -592,7 +604,7 @@ require('lazy').setup({
             '--header-insertion=never',
           },
         },
-        black = {},
+        -- black = {},
         -- gopls = {},
         pyright = {},
         -- rust_analyzer = {},
@@ -635,7 +647,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'clangd',
-        'black',
+        -- 'black',
         'shfmt',
         'pyright',
       })
