@@ -109,8 +109,8 @@ vim.g.have_nerd_font = true
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
-vim.cmd 'autocmd InsertEnter * :set relativenumber'
-vim.cmd 'autocmd InsertLeave * :set norelativenumber'
+vim.cmd 'autocmd InsertEnter * :set norelativenumber'
+vim.cmd 'autocmd InsertLeave * :set relativenumber'
 vim.opt.cmdheight = 1
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
@@ -181,6 +181,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>')
 vim.keymap.set('n', '<C-up>', '{')
 vim.keymap.set('n', '<C-down>', '}')
+vim.keymap.set('n', '<leader>s', '<cmd>:w<CR>')
 
 local enabled = true
 function ToggleDiagnostics()
@@ -344,6 +345,8 @@ require('lazy').setup({
         { "<leader>r_", hidden = true },
         { "<leader>t", group = "[T]oggle Diagnostics On/Off" },
         { "<leader>t_", hidden = true },
+        { "<leader>s", group = "[S]ave File" },
+        { "<leader>s_", hidden = true },
       }
     end,
   },
@@ -693,7 +696,7 @@ require('lazy').setup({
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = {}
+        local disable_filetypes = {c = true, cpp = true}
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
