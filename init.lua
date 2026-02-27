@@ -954,13 +954,13 @@ require('lazy').setup({
     main = 'ibl',
   },
 
-  {
-    'tadachs/ros-nvim',
-    config = function()
-      require('ros-nvim').setup { only_workspace = true }
-    end,
-    dependencies = { 'nvim-lua/plenary.nvim' },
-  },
+  -- {
+  --   'tadachs/ros-nvim',
+  --   config = function()
+  --     require('ros-nvim').setup { only_workspace = true }
+  --   end,
+  --   dependencies = { 'nvim-lua/plenary.nvim' },
+  -- },
 
   {
     'nvimdev/dashboard-nvim',
@@ -1108,6 +1108,7 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       ensure_installed = {
         'bash',
