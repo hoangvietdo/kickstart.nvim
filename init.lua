@@ -954,6 +954,21 @@ require('lazy').setup({
     main = 'ibl',
   },
 
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      latex = {
+        enabled = true,
+        -- This requires 'pylatexenc' to be installed on your system for better rendering
+        -- Run: pip install pylatexenc
+        converter = 'latex2text', 
+      },
+    },
+  },
+
   -- {
   --   'tadachs/ros-nvim',
   --   config = function()
@@ -1103,6 +1118,24 @@ require('lazy').setup({
     config = function()
       require('nvim-surround').setup()
     end,
+  },
+
+  {
+    'sphamba/smear-cursor.nvim',
+    opts = {
+      smear_insert_mode = false,
+      smear_between_buffers = false,
+      stiffness = 0.75,                    -- 0.6      [0, 1]
+      trailing_stiffness = 0.5,            -- 0.45     [0, 1]
+      damping = 1.0,                       -- 0.85     [0, 1]
+      distance_stop_animating = 0.5,       -- 0.1      > 0
+      time_interval = 3,                   -- 17
+    },
+  },
+
+  {
+    'karb94/neoscroll.nvim',
+    opts = {},
   },
 
   { -- Highlight, edit, and navigate code
